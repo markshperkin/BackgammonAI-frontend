@@ -14,7 +14,7 @@ function App() {
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
-    const source = connectSearchStream("http://localhost:5000/stream", (evt) => {
+    const source = connectSearchStream("https://backgammonai-backend.onrender.com/stream", (evt) => {
       // console.log("[SSE] Recieven Event:", evt);
       setEvents(prev => [...prev, evt]);
     });
