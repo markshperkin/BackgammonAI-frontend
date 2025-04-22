@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { startGame, makeMove, getValidMoves, aiMove, connectSearchStream } from "./api";
 import "./App.css";
 import GraphRenderer from "./GraphRenderer"
+import HelpTooltip from "./HelpTooltip";
+import GraphTooltip from "./GraphToolTip";
 
 function App() {
   const [gameState, setGameState] = useState(null);
@@ -50,18 +52,6 @@ function App() {
     }
   };
 
-  const handleNewGame = async () => {
-    const data = await startGame();
-    setGameState(data);
-    setSelectedChecker(null);
-  };
-
-  const fetchValidMoves = async (start) => {
-    const data = await getValidMoves({ start });
-    setValidMoves(data.valid_moves);
-  };
-
-  
   if (screen === "start") {
     return (
       <div className = "container">
@@ -97,6 +87,7 @@ function App() {
       <button onClick={() => setScreen("start")}>
         New Game
       </button>
+      <HelpTooltip tipText="test"/>
       <p>Moves Remaining: {gameState?.moves_remaining ? gameState.moves_remaining.join(", ") : "None"}</p>
 
       <p>Current Player: {gameState?.current_player === 1 ? "White" : "Black"}</p>
@@ -330,6 +321,8 @@ function App() {
         </div>
       </div>
               {/* search graph tree */}
+              <GraphTooltip tipText="test"/>
+
               <div>
                   <GraphRenderer 
                   events={events}
