@@ -80,8 +80,6 @@ function App() {
   if (screen === "game") {
     return (
 
-
-
     <div className="container">
 
       <button onClick={() => setScreen("start")}>
