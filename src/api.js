@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_BASE + "/api/game";
-const STREAM_URL = import.meta.env.VITE_API_BASE + "/stream";
+const API_URL = "https://backgammonai-backend.onrender.com/api/game";
 
 // start game
 export const startGame = async (aiType) => {
