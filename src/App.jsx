@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
-import { startGame, rollDice, makeMove, getValidMoves, aiMove } from "./api";
+import { startGame, makeMove, getValidMoves, aiMove, connectSearchStream } from "./api";
 import "./App.css";
+import GraphRenderer from "./GraphRenderer"
 
 function App() {
   const [gameState, setGameState] = useState(null);
   const [selectedChecker, setSelectedChecker] = useState(null);
   const [screen, setScreen] = useState("start");
   const [selectedAI, setSelectedAI] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [resetKey, setResetKey] = useState(0);
+
+  useEffect(() => {
+    const source = connectSearchStream("http://localhost:5000/stream", (evt) => {
+      // console.log("[SSE] Recieven Event:", evt);
+      setEvents(prev => [...prev, evt]);
+    });
+    return () => source.close();
+  }, []);
 
   useEffect(() => {
     console.log("useEffect triggered, current_player:", gameState?.current_player, "game_over:", gameState?.game_over);
@@ -34,6 +45,8 @@ function App() {
     } else {
       setGameState(data);
       setSelectedChecker(null);
+      setEvents([]) // see if needed
+      setResetKey(prev => prev+1)
     }
   };
 
@@ -316,6 +329,15 @@ function App() {
           </div>
         </div>
       </div>
+              {/* search graph tree */}
+              <div>
+                  <GraphRenderer 
+                  events={events}
+                  resetKey={resetKey}
+                  />
+              </div>
+
+
     </div>
   );
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://127.0.0.1:5000/api/game";
 
+// start game
 export const startGame = async (aiType) => {
     try {
         const response = await axios.post(
@@ -15,6 +16,7 @@ export const startGame = async (aiType) => {
     }
 };
 
+// rolling the dice
 export const rollDice = async () => {
     try {
         const response = await axios.get(`${API_URL}/roll-dice`);
@@ -25,6 +27,7 @@ export const rollDice = async () => {
     }
 };
 
+// make a move
 export const makeMove = async (start, end) => {
     try {
         const response = await axios.post(`${API_URL}/move`, { start, end });
@@ -35,6 +38,7 @@ export const makeMove = async (start, end) => {
     }
 };
 
+// get the game state
 export const getGameState = async () => {
     try {
         const response = await axios.get(`${API_URL}/state`);
@@ -45,6 +49,7 @@ export const getGameState = async () => {
     }
 };
 
+// get all valid moves
 export const getValidMoves = async (payload) => {
     try {
       const response = await axios.post(`${API_URL}/valid-moves`, payload);
@@ -55,6 +60,7 @@ export const getValidMoves = async (payload) => {
     }
   };
 
+// AI agent move
 export const aiMove = async () => {
     try {
       const response = await axios.post(`${API_URL}/ai-move`);
@@ -65,5 +71,31 @@ export const aiMove = async () => {
     }
   };
   
+// data stream of minimax search graph
+export function connectSearchStream(url, onEvent) {
+    const source = new EventSource(url);
+  
+    source.onopen = () => {
+      console.log('[SSE ◀] Connected to', url);
+    };
+  
+    source.onmessage = (e) => {
+    //   console.log('[SSE ◀] Raw data:', e.data);           // ← raw payload
+      try {
+        const event = JSON.parse(e.data);
+        // console.log('[SSE ◀] Parsed event:', event);      // ← debug print
+        onEvent(event);
+      } catch (err) {
+        console.error('[SSE ◀] Parse error:', err, e.data);
+      }
+    };
+  
+    source.onerror = (err) => {
+      console.error('[SSE ◀] Connection error:', err);
+    };
+  
+    return source;
+  }
+
   
   
