@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://backgammonai-backend.onrender.com/api/game";
+// const API_URL = "https://backgammonai-backend.onrender.com/api/game";
+const API_URL = "http://127.0.0.1:5000/api/game";
 
 // start game
 export const startGame = async (aiType) => {
@@ -80,18 +81,18 @@ export function connectSearchStream(url, onEvent) {
     };
   
     source.onmessage = (e) => {
-    // console.log('[SSE ◀] Raw data:', e.data);
+    // console.log('[SSE] Raw data:', e.data);
       try {
         const event = JSON.parse(e.data);
-        // console.log('[SSE ◀] Parsed event:', event);
+        // console.log('[SSE] Parsed event:', event);
         onEvent(event);
       } catch (err) {
-        console.error('[SSE ◀] Parse error:', err, e.data);
+        console.error('[SSE] Parse error:', err, e.data);
       }
     };
   
     source.onerror = (err) => {
-      console.error('[SSE ◀] Connection error:', err);
+      console.error('[SSE] Connection error:', err);
     };
   
     return source;
