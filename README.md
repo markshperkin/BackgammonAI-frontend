@@ -6,7 +6,7 @@ Welcome to the Backgammon AI front-end repository! This repository features the 
 **Clone the repository**
    ```sh
    git clone https://github.com/markshperkin/BackgammonAI-frontend.git
-   cd frontend
+   cd BackgammonAI-frontend
 ```
 ## start the development server
 ```sh
