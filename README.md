@@ -8,6 +8,8 @@ Welcome to the Backgammon AI front-end repository! This repository features the 
    git clone https://github.com/markshperkin/BackgammonAI-frontend.git
    cd BackgammonAI-frontend
 ```
+## install npm:
+Follow this tutorial: https://www.geeksforgeeks.org/how-to-download-and-install-node-js-and-npm/
 ## start the development server
 ```sh
 npm run dev
