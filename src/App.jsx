@@ -13,12 +13,12 @@ function App() {
   const [events, setEvents] = useState([]);
   const [resetKey, setResetKey] = useState(0);
 
-  // useEffect(() => {
-  //   const source = connectSearchStream(evt => {
-  //     setEvents(prev => [...prev, evt]);
-  //   });
-  //   return () => source.close();
-  // }, []);
+  useEffect(() => {
+    const source = connectSearchStream(evt => {
+      setEvents(prev => [...prev, evt]);
+    });
+    return () => source.close();
+  }, []);
 
   useEffect(() => {
     console.log("useEffect triggered, current_player:", gameState?.current_player, "game_over:", gameState?.game_over);
