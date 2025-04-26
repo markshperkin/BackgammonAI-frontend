@@ -2,8 +2,6 @@ import axios from "axios";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 const SSE_BASE = import.meta.env.VITE_SSE_URL;
-// const API_BASE = "http://127.0.0.1:5000/api/game";
-// const SSE_BASE = "http://127.0.0.1:5000/"
 
 
 // start game
