@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE = import.meta.env.VITE_BASE_URL;
 const SSE_BASE = import.meta.env.VITE_SSE_URL;
 
 
@@ -74,7 +74,7 @@ export const aiMove = async () => {
   };
   
 // data stream of minimax search graph
-export function connectSearchStream(SSE_BASE, onEvent) {
+export function connectSearchStream(onEvent) {
     const source = new EventSource(SSE_BASE);
   
     source.onopen = () => {
