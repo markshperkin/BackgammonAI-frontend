@@ -14,12 +14,12 @@ function App() {
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
-    const source = connectSearchStream("http://127.0.0.1:5000/stream", (evt) => {
-      // console.log("[SSE] Recieven Event:", evt);
-      setEvents(prev => [...prev, evt]);
-    });
-    return () => source.close();
-  }, []);
+    // no more hard-coded URL here
+    const source = connectSearchStream(evt => {
+      setEvents(prev => [...prev, evt])
+    })
+    return () => source.close()
+  }, [])
 
   useEffect(() => {
     console.log("useEffect triggered, current_player:", gameState?.current_player, "game_over:", gameState?.game_over);
