@@ -36,6 +36,7 @@ function App() {
     setSelectedAI(aiType);
     const data = await startGame(aiType);
     setGameState(data);
+    setEvents([])
     setScreen("game");
   }
   
