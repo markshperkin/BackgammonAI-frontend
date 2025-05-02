@@ -12,6 +12,7 @@ html, body {
 }
 
 button {
+  appearance: none;
   background-color: black;
   color: white;
   border: none;
@@ -195,10 +196,7 @@ button {
   padding: 0.5rem;
   border: 1px solid #ccc;
   height: 180px;
-  /* overflow-y: auto; */
-  /* background-color: transparent; */
   border-radius: 8px;
-  /* animation: slideIn 0.5s ease-out; */
   width: 110%;
 
 }
