@@ -13,6 +13,8 @@ html, body {
 
 button {
   appearance: none;
+  -webkit-appearance: none;
+  
   background-color: black;
   color: white;
   border: none;
