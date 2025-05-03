@@ -1,4 +1,11 @@
 html, body {
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+
+#root {
+  min-height: 100%;
   background-color: grey;
 }
 
@@ -21,7 +28,28 @@ button {
   padding: 10px 20px;
   margin-bottom: 10px;
   cursor: pointer;
-  
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  background: #444;
+  transform: scale(1.2);
+}
+
+#back-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;  
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+#back-button:hover {
+  background: #444;
+  transform: scale(1.2);
 }
 
 .index-label {
@@ -203,7 +231,22 @@ button {
 
 }
 
+.choice-container {
+  background: transparent;
+}
 
+.choice-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  gap: 8px;
+}
 
 
 

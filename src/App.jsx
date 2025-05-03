@@ -5,6 +5,7 @@ import GraphRenderer from "./GraphRenderer"
 import HelpTooltip from "./HelpTooltip";
 import GraphTooltip from "./GraphToolTip";
 
+
 function App() {
   const [gameState, setGameState] = useState(null);
   const [selectedChecker, setSelectedChecker] = useState(null);
@@ -65,21 +66,52 @@ function App() {
 
   if (screen === "selectAI") {
     return (
+      <div>
+      <button id="back-button" onClick={() => setScreen("start")}>
+        Back
+      </button>
       <div className = "container">
         <h1>Select AI Opponent</h1>
+        <div class="choice-container">
+          <h3 class="choice-title">Base Line</h3>
+          <div class="choice-grid">
         <button onClick={() => handleStartGame("random")}>
           Random Bot
         </button>
+        </div>
+        <h3 class="choice-title">Search</h3>
+        <div class="choice-grid">
         <button onClick={() => handleStartGame("minimax")}>
           Minimax AI
         </button>
+        </div>
+        <h3 class="choice-title">Reinforcement Learning</h3>
+        <div class="choice-grid">
+        <button onClick={() => handleStartGame("TD0v1_4000")}>
+          TD(0) V1_4000
+        </button>
+        <button onClick={() => handleStartGame("TD0v1_10000")}>
+          TD(0) V1_10000
+        </button>
+        <button onClick={() => handleStartGame("TD0v2_4000")}>
+          TD(0) V2_4000
+        </button>
+        <button onClick={() => handleStartGame("TD0v1_10000")}>
+          TD(0) V2_10000
+        </button>
+        </div>
+      </div>
+      </div>
       </div>
     );
   }
 
   if (screen === "game") {
     return (
-
+      <div>
+      <button id="back-button" onClick={() => setScreen("start")}>
+        Back
+      </button>
     <div className="container">
 
       <button onClick={() => setScreen("start")}>
@@ -329,6 +361,7 @@ function App() {
               </div>
 
 
+    </div>
     </div>
   );
 }
