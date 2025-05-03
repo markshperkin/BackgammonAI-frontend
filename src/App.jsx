@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { startGame, makeMove, getValidMoves, aiMove, connectSearchStream } from "./api";
-import "./App.css";
 import GraphRenderer from "./GraphRenderer"
 import HelpTooltip from "./HelpTooltip";
 import GraphTooltip from "./GraphToolTip";
+import "./App.css";
 
 
 function App() {
