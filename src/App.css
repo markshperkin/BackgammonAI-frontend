@@ -16,12 +16,10 @@ html, body {
 button {
   appearance: none;
   -webkit-appearance: none;
-  
   background-color: white;
   color: black;
   border: none;
-  padding: 10px 20px;
-  margin-bottom: 10px;
+
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -35,16 +33,6 @@ button:hover {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  background-color: white;
-  color: black;
-  border: none;
-  padding: 10px 20px;  
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-#back-button:hover {
-  background: #444;
-  transform: scale(1.2);
 }
 
 .index-label {
@@ -237,7 +225,7 @@ button:hover {
 }
 
 .choice-grid {
-  display: grid;
+  display:flex;
   grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 8px;
