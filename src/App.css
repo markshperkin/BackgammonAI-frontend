@@ -14,10 +14,8 @@ html, body {
 }
 
 button {
-  /* appearance: none;
-  -webkit-appearance: none; */
-  background: white;
-  color: black;
+  background: white !important;
+  color: black !important;
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -25,7 +23,7 @@ button {
 
 button:hover {
   background: #444;
-  transform: scale(1.2);
+  transform: scale(1.2) !important;
 }
 
 #back-button {
