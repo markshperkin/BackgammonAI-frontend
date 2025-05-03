@@ -16,7 +16,7 @@ html, body {
 button {
   /* appearance: none;
   -webkit-appearance: none; */
-  background-color: white;
+  background: white;
   color: black;
   border: none;
   cursor: pointer;
