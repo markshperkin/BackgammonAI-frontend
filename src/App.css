@@ -228,6 +228,29 @@ button:hover {
   gap: 8px;
 }
 
+.match-info {
+  position: absolute;
+  top: 16px;
+  left: 80%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24px;
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  z-index: 10;
+}
 
+.match-info p {
+  margin: 0;
+}
 
-
+.selected-ais-display {
+  text-align: center;
+  margin: 24px auto;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}

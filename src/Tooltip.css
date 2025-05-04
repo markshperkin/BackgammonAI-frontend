@@ -1,6 +1,5 @@
 .tooltip {
     position: relative;
-    margin-left: 8px;
     cursor: pointer;
   }
   
@@ -9,7 +8,6 @@
     background: #eee;
     color: #333;
     font-weight: bold;
-    border: 1px solid #999;
   }
   
   .text {
@@ -20,7 +18,7 @@
     padding: 6px 8px;
     border-radius: 4px;
     position: absolute;
-    top: 125%; left: 50%;
+    top: 125%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.8s;

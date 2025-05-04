@@ -13,7 +13,7 @@ export const startGame = async (aiType) => {
         );
         return response.data;
     } catch (error) {
-        console.error("API Error:", error);
+        console.error("API Error at start game:", error);
         return { error: "Failed to start game" };
     }
 };
@@ -98,6 +98,17 @@ export function connectSearchStream(onEvent) {
   
     return source;
   }
+// AI vs AI match
+export const startAIMatch = async (blackAiType, whiteAiType) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE}/start-match`,
+      { blackAiType, whiteAiType }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    return { error: "Failed to start AI match" };
+  }
+};
 
-  
-  
