@@ -119,6 +119,12 @@ function App() {
         <button onClick={() => handleSelectAIMatch("random")}>
           Random Bot
         </button>
+        <button onClick={() => handleSelectAIMatch("FFA")}>
+          Furthest First Bot
+        </button>
+        <button onClick={() => handleSelectAIMatch("CFA")}>
+          Closest First Bot
+        </button>
         </div>
         <h3 class="choice-title">Search</h3>
         <div class="choice-grid">
@@ -167,6 +173,12 @@ function App() {
         <button onClick={() => handleStartGame("random")}>
           Random Bot
         </button>
+        <button onClick={() => handleStartGame("FFA")}>
+          Furthest First Bot
+        </button>
+        <button onClick={() => handleStartGame("CFA")}>
+          Closest First Bot
+        </button>
         </div>
         <h3 class="choice-title">Search</h3>
         <div class="choice-grid">
@@ -191,8 +203,32 @@ function App() {
         <button onClick={() => handleStartGame("TD0v2e_35000")}>
           TD(0) V2e_35000
         </button>
+        <button onClick={() => handleStartGame("TD0v1e_4000")}>
+          TD(0) V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("TD0v1e_10000")}>
+          TD(0) V1e_1000
+        </button>
         <button onClick={() => handleStartGame("TD0v1e_35000")}>
           TD(0) V1e_35000
+        </button>
+        <button onClick={() => handleStartGame("TDLv1e_4000")}>
+          TD(λ) V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("TDLv1e_10000")}>
+          TD(λ) V1e_1000
+        </button>
+        <button onClick={() => handleStartGame("TDLv1e_35000")}>
+          TD(λ) V1e_35000
+        </button>
+        <button onClick={() => handleStartGame("MCv1e_4000")}>
+          MC V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("MCv1e_10000")}>
+          MC V1e_10000
+        </button>
+        <button onClick={() => handleStartGame("MCv1e_35000")}>
+          MC V1e_35000
         </button>
         </div>
       </div>
