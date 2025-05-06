@@ -186,8 +186,8 @@ function App() {
           Minimax AI
         </button>
         </div>
-        <h3 class="choice-title">Reinforcement Learning</h3>
-        <div class="choice-grid">
+        <h3 className="choice-title">Reinforcement Learning</h3>
+        <div className="choice-grid">
         <button onClick={() => handleStartGame("TD0v1_4000")}>
           TD(0) V1_4000
         </button>

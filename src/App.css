@@ -222,8 +222,8 @@ button:hover {
 }
 
 .choice-grid {
-  display:flex;
-  grid-template-columns: repeat(4, auto);
+  display:grid;
+  grid-template-columns: repeat(5, auto);
   justify-content: center;
   gap: 8px;
 }
@@ -235,7 +235,6 @@ button:hover {
   transform: translateX(-50%);
   display: flex;
   gap: 24px;
-  /* background-color: rgba(255, 255, 255, 0.9); */
   padding: 8px 16px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
