@@ -5,7 +5,6 @@ import HelpTooltip from "./HelpTooltip";
 import GraphTooltip from "./GraphToolTip";
 import "./App.css";
 
-
 function App() {
   const [gameState, setGameState] = useState(null);
   const [selectedChecker, setSelectedChecker] = useState(null);
