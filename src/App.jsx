@@ -80,7 +80,7 @@ function App() {
 
   if (screen === "start") {
     return (
-      <div className = "container">
+      <div className = "choice-grid">
         <h1>Welcome to Shesh Besh AI</h1>
         <button onClick={() => setScreen("selectAI")}>
           Click here to play agaist the AI
@@ -245,6 +245,7 @@ function App() {
         </div>
       </div>
       </div>
+
       </div>
     );
   }
