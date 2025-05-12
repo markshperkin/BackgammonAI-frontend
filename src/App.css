@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+
 .container {
   position: absolute;
   top: 50%;
@@ -8,13 +14,22 @@
 }
 
 button {
-  background-color: black;
-  color: white;
+  background: white !important;
+  color: black !important;
   border: none;
-  padding: 10px 20px;
-  margin-bottom: 10px;
   cursor: pointer;
-  
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  background: #444;
+  transform: scale(1.2) !important;
+}
+
+#back-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
 }
 
 .index-label {
@@ -191,16 +206,50 @@ button {
   padding: 0.5rem;
   border: 1px solid #ccc;
   height: 180px;
-  /* overflow-y: auto; */
-  /* background-color: transparent; */
   border-radius: 8px;
-  /* animation: slideIn 0.5s ease-out; */
   width: 110%;
 
 }
 
+.choice-container {
+  background: transparent;
+}
 
+.choice-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ccc;
+}
 
+.choice-grid {
+  display:grid;
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
+  gap: 8px;
+}
 
+.match-info {
+  position: absolute;
+  top: 16px;
+  left: 80%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  z-index: 10;
+}
 
+.match-info p {
+  margin: 0;
+}
 
+.selected-ais-display {
+  text-align: center;
+  margin: 24px auto;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { startGame, makeMove, getValidMoves, aiMove, connectSearchStream } from "./api";
-import "./App.css";
+import { startGame, makeMove, getValidMoves, aiMove, connectSearchStream, startAIMatch } from "./api";
 import GraphRenderer from "./GraphRenderer"
 import HelpTooltip from "./HelpTooltip";
 import GraphTooltip from "./GraphToolTip";
+import "./App.css";
+
 
 function App() {
   const [gameState, setGameState] = useState(null);
@@ -12,10 +13,12 @@ function App() {
   const [selectedAI, setSelectedAI] = useState(null);
   const [events, setEvents] = useState([]);
   const [resetKey, setResetKey] = useState(0);
+  const [selectedAgents, setSelectedAgents] = useState([]);
+  const [isAIMatch, setIsAIMatch] = useState(false);
+  const [matchAIs, setMatchAIs] = useState({ black: null, white: null });
 
   useEffect(() => {
-    const source = connectSearchStream("http://127.0.0.1:5000/stream", (evt) => {
-      // console.log("[SSE] Recieven Event:", evt);
+    const source = connectSearchStream(evt => {
       setEvents(prev => [...prev, evt]);
     });
     return () => source.close();
@@ -23,7 +26,7 @@ function App() {
 
   useEffect(() => {
     console.log("useEffect triggered, current_player:", gameState?.current_player, "game_over:", gameState?.game_over);
-    if (gameState && gameState.current_player === -1 && !gameState.game_over) {
+    if (gameState && !gameState.game_over && (gameState.current_player === -1 || isAIMatch)) {
       setTimeout(() => {
         aiMove().then(data => {
           console.log("AI move complete", data);
@@ -37,6 +40,8 @@ function App() {
     setSelectedAI(aiType);
     const data = await startGame(aiType);
     setGameState(data);
+    setEvents([])
+    setIsAIMatch(false);
     setScreen("game");
   }
   
@@ -47,9 +52,30 @@ function App() {
     } else {
       setGameState(data);
       setSelectedChecker(null);
-      setEvents([]) // see if needed
+      setEvents([])
       setResetKey(prev => prev+1)
     }
+  };
+
+  const handleSelectAIMatch = (agentType) => {
+    setSelectedAgents(prev => {
+      if (prev.includes(agentType)) {
+        return prev.filter(a => a !== agentType);
+      }
+      if (prev.length < 2) {
+        return [...prev, agentType];
+      }
+      return prev;
+    });
+  };
+
+  const handleBeginMatch = async () => {
+    const [blackAI, whiteAI] = selectedAgents;
+    setMatchAIs({ black: blackAI, white: whiteAI });
+    setIsAIMatch(true);
+    const state = await startAIMatch(blackAI, whiteAI);
+    setGameState(state);
+    setScreen("game");
   };
 
   if (screen === "start") {
@@ -59,27 +85,182 @@ function App() {
         <button onClick={() => setScreen("selectAI")}>
           Click here to play agaist the AI
         </button>
+        <button onClick={() => setScreen("AImatch")}>
+          Click here to watch AI vs AI
+        </button>
+      </div>
+    );
+  }
+
+  if (screen === "AImatch") {
+    return (
+      <div>
+      <button id="back-button" onClick={() => setScreen("start")}>
+        Back
+      </button>
+      <div className = "container">
+        <h1>Select AIs</h1>
+        {selectedAgents.length > 0 && (
+          <div className="selected-ais-display">
+            {selectedAgents[0] && (
+              <p><strong>Black:</strong> {selectedAgents[0]}</p>
+            )}
+            {selectedAgents[1] && (
+              <p><strong>White:</strong> {selectedAgents[1]}</p>
+            )}
+          <button onClick={handleBeginMatch}>
+            Start Match
+          </button>
+          </div>
+        )}
+        <div class="choice-container">
+          <h3 class="choice-title">Base Line</h3>
+          <div class="choice-grid">
+        <button onClick={() => handleSelectAIMatch("random")}>
+          Random Bot
+        </button>
+        <button onClick={() => handleSelectAIMatch("FFA")}>
+          Furthest First Bot
+        </button>
+        <button onClick={() => handleSelectAIMatch("CFA")}>
+          Closest First Bot
+        </button>
+        </div>
+        <h3 class="choice-title">Search</h3>
+        <div class="choice-grid">
+        <button onClick={() => handleSelectAIMatch("minimax")}>
+          Minimax AI
+        </button>
+        </div>
+        <h3 class="choice-title">Reinforcement Learning</h3>
+        <div class="choice-grid">
+        {/* <button onClick={() => handleSelectAIMatch("TD0v2e_4000")}>
+          TD(0) V2_4000
+        </button>
+        <button onClick={() => handleSelectAIMatch("TD0v2e_10000")}>
+          TD(0) V2_10000
+        </button>
+        <button onClick={() => handleSelectAIMatch("TD0v2e_35000")}>
+          TD(0) V2e_35000
+        </button>
+        <button onClick={() => handleSelectAIMatch("TD0v1e_4000")}>
+          TD(0) V1e_4000
+        </button>
+        <button onClick={() => handleSelectAIMatch("TD0v1e_10000")}>
+          TD(0) V1e_10000
+        </button> */}
+        <button onClick={() => handleSelectAIMatch("TD0v1e_35000")}>
+          TD(0) V1e_35000
+        </button>
+        {/* <button onClick={() => handleSelectAIMatch("TDLv1e_4000")}>
+          TD(λ) V1e_4000
+        </button>
+        <button onClick={() => handleSelectAIMatch("TDLv1e_10000")}>
+          TD(λ) V1e_10000
+        </button> */}
+        <button onClick={() => handleSelectAIMatch("TDLv1e_35000")}>
+          TD(λ) V1e_35000
+        </button>
+        {/* <button onClick={() => handleSelectAIMatch("MCv1e_4000")}>
+          MC V1e_4000
+        </button> */}
+        {/* <button onClick={() => handleSelectAIMatch("MCv1e_10000")}>
+          MC V1e_10000
+        </button> */}
+        <button onClick={() => handleSelectAIMatch("MCv1e_35000")}>
+          MC V1e_35000
+        </button>
+        </div>
+      </div>
+      </div>
       </div>
     );
   }
 
   if (screen === "selectAI") {
     return (
+      <div>
+      <button id="back-button" onClick={() => setScreen("start")}>
+        Back
+      </button>
       <div className = "container">
         <h1>Select AI Opponent</h1>
+        <div class="choice-container">
+          <h3 class="choice-title">Base Line</h3>
+          <div class="choice-grid">
         <button onClick={() => handleStartGame("random")}>
           Random Bot
         </button>
+        <button onClick={() => handleStartGame("FFA")}>
+          Furthest First Bot
+        </button>
+        <button onClick={() => handleStartGame("CFA")}>
+          Closest First Bot
+        </button>
+        </div>
+        <h3 class="choice-title">Search</h3>
+        <div class="choice-grid">
         <button onClick={() => handleStartGame("minimax")}>
           Minimax AI
         </button>
+        </div>
+        <h3 className="choice-title">Reinforcement Learning</h3>
+        <div className="choice-grid">
+        {/* <button onClick={() => handleStartGame("TD0v2e_4000")}>
+          TD(0) V2_4000
+        </button>
+        <button onClick={() => handleStartGame("TD0v2e_10000")}>
+          TD(0) V2_10000
+        </button>
+        <button onClick={() => handleStartGame("TD0v2e_35000")}>
+          TD(0) V2e_35000
+        </button>
+        <button onClick={() => handleStartGame("TD0v1e_4000")}>
+          TD(0) V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("TD0v1e_10000")}>
+          TD(0) V1e_10000
+        </button> */}
+        <button onClick={() => handleStartGame("TD0v1e_35000")}>
+          TD(0) V1e_35000
+        </button>
+        {/* <button onClick={() => handleStartGame("TDLv1e_4000")}>
+          TD(λ) V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("TDLv1e_10000")}>
+          TD(λ) V1e_10000
+        </button> */}
+        <button onClick={() => handleStartGame("TDLv1e_35000")}>
+          TD(λ) V1e_35000
+        </button>
+        {/* <button onClick={() => handleStartGame("MCv1e_4000")}>
+          MC V1e_4000
+        </button>
+        <button onClick={() => handleStartGame("MCv1e_10000")}>
+          MC V1e_10000
+        </button> */}
+        <button onClick={() => handleStartGame("MCv1e_35000")}>
+          MC V1e_35000
+        </button>
+        </div>
+      </div>
+      </div>
       </div>
     );
   }
 
   if (screen === "game") {
     return (
-
+      <div>
+      <button id="back-button" onClick={() => setScreen("start")}>
+        Back
+      </button>
+        {isAIMatch && (
+          <div className="match-info">
+            <p><strong>Black:</strong> {matchAIs.black}</p>
+            <p><strong>White:</strong> {matchAIs.white}</p>
+          </div>
+        )}
     <div className="container">
 
       <button onClick={() => setScreen("start")}>
@@ -329,6 +510,7 @@ function App() {
               </div>
 
 
+    </div>
     </div>
   );
 }
