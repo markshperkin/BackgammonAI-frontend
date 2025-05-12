@@ -5,7 +5,6 @@ import HelpTooltip from "./HelpTooltip";
 import GraphTooltip from "./GraphToolTip";
 import "./App.css";
 
-
 function App() {
   const [gameState, setGameState] = useState(null);
   const [selectedChecker, setSelectedChecker] = useState(null);
@@ -80,14 +79,18 @@ function App() {
 
   if (screen === "start") {
     return (
-      <div className = "container">
+      <div className="container">
+      <div class="choice-container">
         <h1>Welcome to Shesh Besh AI</h1>
+      <div className = "choice-grid">
         <button onClick={() => setScreen("selectAI")}>
           Click here to play agaist the AI
         </button>
         <button onClick={() => setScreen("AImatch")}>
           Click here to watch AI vs AI
         </button>
+      </div>
+      </div>
       </div>
     );
   }
@@ -245,6 +248,7 @@ function App() {
         </div>
       </div>
       </div>
+
       </div>
     );
   }
