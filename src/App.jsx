@@ -134,7 +134,7 @@ function App() {
         </div>
         <h3 class="choice-title">Reinforcement Learning</h3>
         <div class="choice-grid">
-        <button onClick={() => handleSelectAIMatch("TD0v2e_4000")}>
+        {/* <button onClick={() => handleSelectAIMatch("TD0v2e_4000")}>
           TD(0) V2_4000
         </button>
         <button onClick={() => handleSelectAIMatch("TD0v2e_10000")}>
@@ -148,25 +148,25 @@ function App() {
         </button>
         <button onClick={() => handleSelectAIMatch("TD0v1e_10000")}>
           TD(0) V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleSelectAIMatch("TD0v1e_35000")}>
           TD(0) V1e_35000
         </button>
-        <button onClick={() => handleSelectAIMatch("TDLv1e_4000")}>
+        {/* <button onClick={() => handleSelectAIMatch("TDLv1e_4000")}>
           TD(λ) V1e_4000
         </button>
         <button onClick={() => handleSelectAIMatch("TDLv1e_10000")}>
           TD(λ) V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleSelectAIMatch("TDLv1e_35000")}>
           TD(λ) V1e_35000
         </button>
-        <button onClick={() => handleSelectAIMatch("MCv1e_4000")}>
+        {/* <button onClick={() => handleSelectAIMatch("MCv1e_4000")}>
           MC V1e_4000
-        </button>
-        <button onClick={() => handleSelectAIMatch("MCv1e_10000")}>
+        </button> */}
+        {/* <button onClick={() => handleSelectAIMatch("MCv1e_10000")}>
           MC V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleSelectAIMatch("MCv1e_35000")}>
           MC V1e_35000
         </button>
@@ -206,7 +206,7 @@ function App() {
         </div>
         <h3 className="choice-title">Reinforcement Learning</h3>
         <div className="choice-grid">
-        <button onClick={() => handleStartGame("TD0v2e_4000")}>
+        {/* <button onClick={() => handleStartGame("TD0v2e_4000")}>
           TD(0) V2_4000
         </button>
         <button onClick={() => handleStartGame("TD0v2e_10000")}>
@@ -220,25 +220,25 @@ function App() {
         </button>
         <button onClick={() => handleStartGame("TD0v1e_10000")}>
           TD(0) V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleStartGame("TD0v1e_35000")}>
           TD(0) V1e_35000
         </button>
-        <button onClick={() => handleStartGame("TDLv1e_4000")}>
+        {/* <button onClick={() => handleStartGame("TDLv1e_4000")}>
           TD(λ) V1e_4000
         </button>
         <button onClick={() => handleStartGame("TDLv1e_10000")}>
           TD(λ) V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleStartGame("TDLv1e_35000")}>
           TD(λ) V1e_35000
         </button>
-        <button onClick={() => handleStartGame("MCv1e_4000")}>
+        {/* <button onClick={() => handleStartGame("MCv1e_4000")}>
           MC V1e_4000
         </button>
         <button onClick={() => handleStartGame("MCv1e_10000")}>
           MC V1e_10000
-        </button>
+        </button> */}
         <button onClick={() => handleStartGame("MCv1e_35000")}>
           MC V1e_35000
         </button>
