@@ -2,6 +2,9 @@
 
 Welcome to the Backgammon AI front-end repository! This repository features the front-end build of backgammon.
 
+## preview:
+Please check out the demo of this project at [link](https://shesh-besh.com/). Note that I use a free plan, so it may take up to one minute to start working (thanks to render.com).
+
 ## how to run:
 **Clone the repository**
    ```sh
