@@ -151,8 +151,9 @@ function App() {
             </div>
             <h3 class="choice-title">Search</h3>
             <div class="choice-grid">
-              <button onClick={() => handleSelectAIMatch("minimax")}>
-                Minimax AI
+              {/* <button onClick={() => handleSelectAIMatch("minimax")}> */}
+              <button>
+                Minimax AI (due to high compute needs, this agent is not available)
               </button>
             </div>
             <h3 class="choice-title">Reinforcement Learning</h3>
@@ -542,11 +543,11 @@ function App() {
             </div>
           </div>
           {/* search graph tree */}
-          <GraphTooltip tipText="test" />
+          {/* <GraphTooltip tipText="test" />
 
           <div>
             <GraphRenderer events={events} resetKey={resetKey} />
-          </div>
+          </div> */}
         </div>
       </div>
     );
