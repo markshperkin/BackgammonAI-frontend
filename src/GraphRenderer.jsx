@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { DataSet } from 'vis-data';
-import { Network } from 'vis-network';
+import React, { useEffect, useRef } from "react";
+import { DataSet } from "vis-data";
+import { Network } from "vis-network";
 
 const GraphRenderer = ({ events, resetKey }) => {
   const containerRef = useRef(null);
-  const networkRef   = useRef(null);
-  const nodesRef     = useRef(new DataSet());
-  const edgesRef     = useRef(new DataSet());
+  const networkRef = useRef(null);
+  const nodesRef = useRef(new DataSet());
+  const edgesRef = useRef(new DataSet());
 
   // init the network once
   useEffect(() => {
@@ -15,38 +15,38 @@ const GraphRenderer = ({ events, resetKey }) => {
         containerRef.current,
         {
           nodes: nodesRef.current,
-          edges: edgesRef.current
+          edges: edgesRef.current,
         },
         {
           nodes: {
-            shape: 'box',
+            shape: "box",
             margin: 10,
             font: { size: 14 },
-            color: { border: '#333', background: '#fff' }
+            color: { border: "#333", background: "#fff" },
           },
           edges: {
             arrows: { to: { enabled: false } },
             smooth: {
-              type: 'cubicBezier',
-              forceDirection: 'vertical',
-              roundness: 0.4
-            }
+              type: "cubicBezier",
+              forceDirection: "vertical",
+              roundness: 0.4,
+            },
           },
           layout: {
             hierarchical: {
               enabled: true,
-              direction: 'UD',
-              sortMethod: 'directed',
+              direction: "UD",
+              sortMethod: "directed",
               levelSeparation: 120,
-              nodeSpacing: 80
-            }
+              nodeSpacing: 80,
+            },
           },
           physics: false,
           interaction: {
             hover: true,
             dragNodes: true,
-            zoomView: true
-          }
+            zoomView: true,
+          },
         }
       );
     }
@@ -62,33 +62,32 @@ const GraphRenderer = ({ events, resetKey }) => {
   useEffect(() => {
     if (!networkRef.current) return;
 
-    events.forEach(evt => {
+    events.forEach((evt) => {
       const { id, parent, move, score, current_player, ischance } = evt;
       const edgeId = parent ? `${parent}-${id}` : null;
 
       // if node doesnt exist, create it (pre‑order)
       if (!nodesRef.current.get(id)) {
-        const label = score != null
-          ? `${move}: ${score.toFixed(2)}`
-          : `${move}`;        // placeholder label
-        nodesRef.current.add({ 
-          id, 
+        const label =
+          score != null ? `${move}: ${score.toFixed(2)}` : `${move}`; // placeholder label
+        nodesRef.current.add({
+          id,
           label,
           color: {
-            border: '#333',
+            border: "#333",
             background: ischance
-            ? '#ffff00'           // chance nodes in yellow
-            : current_player === 1
-              ? '#cce5ff'         // player 1
-              : '#ffcccc'         // player 2
-          } 
+              ? "#ffff00" // chance nodes in yellow
+              : current_player === 1
+              ? "#cce5ff" // player - 1
+              : "#ffcccc", // player - 2
+          },
         });
       }
       // if node does exist and now has a real score, update it
       else if (score != null) {
         nodesRef.current.update({
           id,
-          label: `${move}: ${score.toFixed(2)}`
+          label: `${move}: ${score.toFixed(2)}`,
         });
       }
 
@@ -101,7 +100,7 @@ const GraphRenderer = ({ events, resetKey }) => {
     // redraw
     networkRef.current.setData({
       nodes: nodesRef.current,
-      edges: edgesRef.current
+      edges: edgesRef.current,
     });
   }, [events]);
 

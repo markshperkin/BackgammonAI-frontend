@@ -1,6 +1,6 @@
-import React from 'react';
-import './Tooltip.css';
-import { graphTooltipText } from './toolTipTexts';
+import React from "react";
+import "./Tooltip.css";
+import { graphTooltipText } from "./toolTipTexts";
 
 export default function GraphTooltip({ tipText, style }) {
   return (
@@ -10,7 +10,3 @@ export default function GraphTooltip({ tipText, style }) {
     </div>
   );
 }
-
-
-
-

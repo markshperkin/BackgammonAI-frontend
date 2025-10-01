@@ -1,6 +1,6 @@
-import React from 'react';
-import './Tooltip.css';
-import { playTooltipText } from './toolTipTexts';
+import React from "react";
+import "./Tooltip.css";
+import { playTooltipText } from "./toolTipTexts";
 
 export default function HelpTooltip({ tipText, style }) {
   return (
@@ -10,7 +10,3 @@ export default function HelpTooltip({ tipText, style }) {
     </div>
   );
 }
-
-
-
-
