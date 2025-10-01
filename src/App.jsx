@@ -197,8 +197,9 @@ function App() {
             </div>
             <h3 class="choice-title">Search</h3>
             <div class="choice-grid">
-              <button onClick={() => handleStartGame("minimax")}>
-                Minimax AI
+              {/* <button onClick={() => handleStartGame("minimax")}> */}
+              <button>
+                Minimax AI (due to high compute needs, this agent is not available)
               </button>
             </div>
             <h3 className="choice-title">Reinforcement Learning</h3>
