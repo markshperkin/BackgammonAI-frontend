@@ -23,6 +23,9 @@ function App() {
   const [isAIMatch, setIsAIMatch] = useState(false);
   const [matchAIs, setMatchAIs] = useState({ black: null, white: null });
 
+  // show loader while starting a game
+  const [isStarting, setIsStarting] = useState(false);
+
   useEffect(() => {
     const source = connectSearchStream((evt) => {
       setEvents((prev) => [...prev, evt]);
@@ -53,13 +56,31 @@ function App() {
     }
   }, [gameState]);
 
+  // helper to render the centered loader
+  const renderLoader = (text = "Starting backend… could take up to a minute") => (
+    <div className="loader-wrap" role="status" aria-live="polite">
+      <div className="loader" />
+      <p className="loader-text">{text}</p>
+    </div>
+  );
+
   const handleStartGame = async (aiType) => {
     setSelectedAI(aiType);
-    const data = await startGame(aiType);
-    setGameState(data);
-    setEvents([]);
-    setIsAIMatch(false);
-    setScreen("game");
+    setIsStarting(true);
+    setScreen("loading"); // show loader immediately
+    try {
+      const data = await startGame(aiType);
+      setGameState(data);
+      setEvents([]);
+      setIsAIMatch(false);
+      setScreen("game"); // switch to game when ready
+    } catch (e) {
+      console.error(e);
+      alert("Failed to start game (server cold start?). Please try again.");
+      setScreen("selectAI"); // bounce back to selection on error
+    } finally {
+      setIsStarting(false);
+    }
   };
 
   const handleMove = async (start, end) => {
@@ -90,10 +111,31 @@ function App() {
     const [blackAI, whiteAI] = selectedAgents;
     setMatchAIs({ black: blackAI, white: whiteAI });
     setIsAIMatch(true);
-    const state = await startAIMatch(blackAI, whiteAI);
-    setGameState(state);
-    setScreen("game");
+    setIsStarting(true);
+    setScreen("loading"); // show loader for AI vs AI
+    try {
+      const state = await startAIMatch(blackAI, whiteAI);
+      setGameState(state);
+      setScreen("game");
+    } catch (e) {
+      console.error(e);
+      alert("Failed to start AI match (server cold start?). Please try again.");
+      setScreen("AImatch");
+    } finally {
+      setIsStarting(false);
+    }
   };
+
+  if (screen === "loading") {
+    return (
+      <div>
+        <button id="back-button">
+          Back
+        </button>
+        {renderLoader("Warming up server… this can take up to a minute")}
+      </div>
+    );
+  }
 
   if (screen === "start") {
     return (
